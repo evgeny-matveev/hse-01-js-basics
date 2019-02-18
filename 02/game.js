@@ -4,9 +4,9 @@
 // Потоплен корабль или нет
 
 // Создаем три переменные: location1, location2, location3
-let location1 = 5
-let location2 = 6
-let location3 = 7
+let location1 = Math.floor(Math.random() * 8)
+let location2 = location1 + 1
+let location3 = location2 + 1
 // Создаем переменную currentShot
 let currentShot
 // Создаем переменную, чтобы считать выстрелы
