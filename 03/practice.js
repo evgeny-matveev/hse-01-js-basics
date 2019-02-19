@@ -77,8 +77,57 @@ function checkBedTime(wakeUpTime) {
 checkBedTime(9)
 checkBedTime(7)
 
+// addOne() — принимает любое число, прибавляет 1 и возвращает результат
+
+function addOne(num) {
+  return num + 1
+}
+let number = 10
+let num = 20
+console.log("Вызываю функцию addOne(number): " + addOne(number))
+console.log("Вызываю функцию addOne(num): " + addOne(num))
+console.log("Вызываю функцию addOne(15): " + addOne(15))
 
 
+function nextEven(num) {
+  if (num % 2 === 0) {
+    return num + 2
+  }
+  return num + 1
+}
+
+function nextEvenOther(num) {
+  if (Number.isInteger(num)) {
+    return num + 2
+  }
+  return num + 1
+}
+
+console.log(nextEven(1)) // 2
+console.log(nextEven(2)) // 4
+console.log(nextEven(3)) // 4
+
+// makeDiff() — принимает 3 числа и к наименьшему прибавляет 1, среднее делает четным: а от большого отнимает меньшее + среднее. Описывает все шаги в консоли
+
+function makeDiff(a, b, c) {
+  let min = Math.min(a, b, c)
+  let max = Math.max(a, b, c)
+  let middle = a + b + c - min - max
+
+  console.log("min + 1 = " + addOne(min))
+  console.log("среднее сделал четным: " + nextEven(middle))
+  console.log("max - min + middle = " + (max - min + middle))
+}
+
+makeDiff(10, 20, 30)
+
+function calcPrice(total, perItem) {
+  return total * perItem
+}
+
+function splitPrice(total, people) {
+  return total / people
+}
 
 
 
