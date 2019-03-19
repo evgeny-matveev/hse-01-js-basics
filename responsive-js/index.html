@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Отзывчивый Джаваскрипт</title>
+  <style>
+    .cube {
+      height: 300px;
+      width: 300px;
+      background-color: red;
+      transition: 800ms all ease;
+      animation: vibration 300ms linear infinite;
+    }
+    .animated {
+      border-radius: 50%;
+    }
+    .cubeTwo {
+      height: 350px;
+      width: 350px;
+      background-color: blue;
+    }
+    @keyframes vibration {
+      0% {
+        transform: translate(0);
+      }
+      20% {
+        transform: translate(-2px, 2px);
+      }
+      40% {
+        transform: translate(-2px, -2px);
+      }
+      60% {
+        transform: translate(2px, 2px);
+      }
+      80% {
+        transform: translate(2px, -2px);
+      }
+      100% {
+        transform: translate(0);
+      }
+    }
+    @media (max-width: 768px) {
+      .animated {
+        border-radius: 0px;
+        background-color: green;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="cube" class="cube"></div>
+  <div id="cubeTwo" class="cubeTwo"></div>
+
+  <script src="anime.min.js"></script>
+  <script>
+    let desktopAnimation = anime({
+      targets: ".cubeTwo",
+      translateX: 250,
+      translateY: -250,
+      loop: true,
+      borderRadius: ['0%', '50%'],
+      duration: 1200,
+      autoplay: false,
+      easing: 'easeInOutQuad',
+      direction: 'alternate'
+    })
+    let mobileAnimation = anime({
+      targets: ".cubeTwo",
+      rotate: 250,
+      scale: 1.2,
+      loop: true,
+      autoplay: false,
+      duration: 3000,
+      direction: 'alternate'
+    })
+    if (window.innerWidth > 768) {
+      desktopAnimation.play()
+    } else {
+      mobileAnimation.play()
+    }
+    let $cube = document.getElementById("cube")
+    $cube.onclick = function handleClick() {
+      this.classList.toggle("animated")
+    }
+    window.addEventListener("resize", function(event) {
+      if (event.target.innerWidth > 768) {
+        $cube.style.animation = "none"
+        desktopAnimation.play()
+        mobileAnimation.pause()
+      } else {
+        $cube.style.animation = "vibration 300ms linear infinite"
+        desktopAnimation.pause()
+        mobileAnimation.play()
+      }
+    })
+  </script>
+</body>
+</html>

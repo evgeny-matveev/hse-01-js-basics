@@ -1,6 +1,9 @@
 // Сделайте 3 блюда — 3 объекта с полями name и isHealthy.
 
 let mealOne = {
+  inner: {
+    inside: '123px'
+  },
   name: "Греча",
   isHealthy: true,
   spoons: Math.floor(Math.random() * 5 + 2)
