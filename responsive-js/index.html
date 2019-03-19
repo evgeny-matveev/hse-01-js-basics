@@ -72,29 +72,42 @@
       scale: 1.2,
       loop: true,
       autoplay: false,
-      duration: 3000,
+      duration: 1000,
       direction: 'alternate'
     })
+
     if (window.innerWidth > 768) {
       desktopAnimation.play()
     } else {
       mobileAnimation.play()
     }
+
     let $cube = document.getElementById("cube")
     $cube.onclick = function handleClick() {
       this.classList.toggle("animated")
     }
-    window.addEventListener("resize", function(event) {
+
+    // Документация: https://underscorejs.org/#debounce
+    // Кладем функцию для упрвления анимациями при изменении размеров экрана внутрь переменной. Ниже мы ей воспользуемся.
+    let handleAnimations = function(event) {
+      // Если ширина экрана больше 768
       if (event.target.innerWidth > 768) {
+        // Меняем стиль красного куба
         $cube.style.animation = "none"
+        // Запускаем одну анимацию
         desktopAnimation.play()
+        // Выключаем другую
         mobileAnimation.pause()
       } else {
         $cube.style.animation = "vibration 300ms linear infinite"
         desktopAnimation.pause()
         mobileAnimation.play()
       }
-    })
+    }
+    // Оптимизируем функцию, которая должна срабатывать при изменении размеров экрана
+    let lazyResize = _.debounce(handleAnimations, 300)
+    // Добавляем оптимизированную функцию в обработчик событий
+    window.addEventListener("resize", lazyResize)
   </script>
 </body>
 </html>
